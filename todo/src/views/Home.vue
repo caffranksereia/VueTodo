@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Todo msg="Welcome Todo"/>
+    <Todo/>
   </div>
 </template>
 
