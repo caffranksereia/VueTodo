@@ -56,11 +56,11 @@ export default {
         done:this.done
       }
       if(this.newTodo.trim() !==""){
-          if(this.eddit){
-             this.todo[this.edditId] = this.newTodo,
-             this.infoTodo.newTodo = "",
-             this.eddit = false
-             console.log(data)
+        if(this.eddit){
+          this.todo[this.edditId] = this.newTodo,
+          this.infoTodo.newTodo = "",
+          this.eddit = false
+          console.log(data)
              Todo.todoSave(data)
              this.List();
             alert('atualizado')
