@@ -4,15 +4,15 @@
     <div class="tituloTodo">
       <form action="">
         <label for="">Titulo</label>
-        <input type="text" name="titulo" id="titulo">
+        <input type="text" name="titulo" id="titulo" v-model="titulo">
         <label for="">Todo</label>
-        <input type="text" name="todo" id="todo">
+        <input type="text" name="todo" id="todo" v-model="newTodo" @keyup.enter="Adicionar">
       </form>
     </div>
     <h1>Lista Todo</h1>
     <div class="todolist">
-      <ul>
-        <li></li>
+      <ul v-for="(todo) in todo" :key="todo.id">
+        <li> {{ todo.id }} - {{ todo.titulo}} {{ todo.newTodo }} - {{ doneSucess }} - {{ index }}</li>
       </ul>
     </div>
     
@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import Todo from '@/Service/Todo';
+
 export default {
   name: 'Todo',
   props: {
@@ -28,6 +30,7 @@ export default {
   data(){
     return{
       id:'',
+      titulo:'',
       newTodo:'',
       doneSucess:true,
       eddit:null,
@@ -43,7 +46,35 @@ export default {
       console.log(res.data)
       })
 
-    }
+    },
+    Adicionar(){
+      const data = {
+        newTodo:this.newTodo,
+        titulo:this.titulo,
+        eddit:this.eddit,
+        edditId:this.edditId,
+        done:this.done
+      }
+      if(this.newTodo.trim() !==""){
+          if(this.eddit){
+             this.todo[this.edditId] = this.newTodo,
+             this.infoTodo.newTodo = "",
+             this.eddit = false
+             console.log(data)
+             Todo.todoSave(data)
+             this.List();
+            alert('atualizado')
+            this.newTodo = ''
+            }else{
+              this.todo.push(this.newTodo),
+              console.log(data)
+              Todo.todoSave(data)
+              this.List();
+              alert('Salvo')
+              this.newTodo = ''
+              }
+            }
+    },
   }
 }
   
