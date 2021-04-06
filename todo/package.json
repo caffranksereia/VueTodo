@@ -2,6 +2,9 @@
   "name": "todo",
   "version": "0.1.0",
   "private": true,
+  "husky": {
+    "commit-msg":"commitlint -E HUSKY_GIT_PARAMS"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
