@@ -20,7 +20,7 @@
       <h1>Lista Todo</h1>
     </div>
     <div class="todolist" style="height:250px;width:100%" >
-      <ul v-for="todo in todo" :key="todo.id" :todo = todo>
+      <ul v-for="todo of todos" :key="todo.id">
         <div style="width:100%">
           <li><div>
                 <h3>Titulo</h3>
@@ -33,6 +33,7 @@
           </li>
         </div>
         <button @click="Excluir(todo.id)" style="margin-top:10px">Excluir</button>
+        <button @click="Editar(todo)">Editar</button>
         
       </ul>
     </div>
@@ -49,11 +50,12 @@ export default {
   },
   data(){
     return{
-     todos:{
-       Titulo:'',
-       Todo:''
+     todo:{
+       id:"",
+       Titulo:"",
+       Todo:""
       },
-      todo:[]
+      todos:[]
     }
   },
   mounted(){
@@ -62,7 +64,7 @@ export default {
   methods:{
     Listar(){
       Todo.todoList().then(res =>{
-        this.todo = res.data
+        this.todos = res.data
         
       })
     },
@@ -76,12 +78,19 @@ export default {
         this.Listar()
       }else{
         this.todo.push(this.Todo),
-        Todo.todoSave(data)
+        Todo.todoUp(data)
         this.List();
         alert('Salvo')
-        this.newTodo = ''
+        this.Todo = ''
       }
     },
+    Editar(todo){
+      this.todo = todo
+      console.log(todo)
+
+
+    }
+    ,
     Excluir(id){
       Todo.todoDel(id)
       this.Listar()
