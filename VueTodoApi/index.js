@@ -37,8 +37,7 @@ app.post('/Todo/post',(req,res) =>{
         id:v4(),
         Titulo:req.body.Titulo,
         Todo:req.body.Todo,
-        eddit:false,
-        done:false
+        
     } 
 
     db.get('Todo').push(NewTodo).write()
