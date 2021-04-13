@@ -85,7 +85,6 @@ export default {
       }
     },
     Editar(todo){
-      this.todo = todo
       console.log(todo)
 
 
