@@ -10,8 +10,9 @@ export default {
     todoSave:(todos) =>{
         return apiTodo.post('/Todo/post',todos)
     },
-    todoUp:(todos) =>{
-        return apiTodo.put('/Todo/update/',todos)
+    todoUp:(id,todo) =>{
+        return apiTodo.put(`/Todo/update/${id}`,todo);
+        
     },
     todoDel:(id) =>{
         return apiTodo.delete(`/Todo/delete/${id}`)

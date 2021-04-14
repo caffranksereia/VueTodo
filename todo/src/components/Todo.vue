@@ -7,14 +7,15 @@
       <form>
         <div class="meu-box">
           <label class="label-Titulo">Titulo</label>
-          <input type="text" name="titulo" id="titulo" v-model="Titulo" placeholder="Titulo" class="input-Titulo">
+          <input type="text" name="titulo" id="titulo" v-model="todo.Titulo" placeholder="Titulo" class="input-Titulo">
         </div>
        <div class="meu-box">
           <label class="label-Todo">Todo</label>
-          <input type="text" name="todo" id="todo" v-model="Todo" placeholder="Todo" class="input-Todo">
+          <input type="text" name="todo" id="todo" v-model="todo.Todo" placeholder="Todo" class="input-Todo">
         </div>
       </form>
-      <button @click="Adicionar" style="width:100px;margin-top:10px">Adicionar</button>
+      <button v-if="!isEdit" @click="Adicionar()" style="width:100px;margin-top:10px">Adicionar</button>
+      <button v-if="isEdit" @click="updateEdit(todo.id)" style="width:100px;margin-top:10px">Atualizar</button>
     </div>
     <div class="txt" style="width:100%;height:100px;">
       <h1>Lista Todo</h1>
@@ -33,8 +34,7 @@
           </li>
         </div>
         <button @click="Excluir(todo.id)" style="margin-top:10px">Excluir</button>
-        <button @click="Editar(todo)">Editar</button>
-        
+        <button @click="Editar(todo)">Editar</button> 
       </ul>
     </div>
   </div>
@@ -45,6 +45,7 @@ import Todo from '../Service/Todo';
 
 export default {
   name: 'Todo',
+
   props: {
     msg: String
   },
@@ -55,7 +56,8 @@ export default {
        Titulo:"",
        Todo:""
       },
-      todos:[]
+      todos:[],
+      isEdit: false
     }
   },
   mounted(){
@@ -69,27 +71,49 @@ export default {
       })
     },
     Adicionar(){
-      const data = {
-        Titulo: this.Titulo,
-        Todo: this.Todo,
+
+       const data = {
+        Titulo: this.todo.Titulo,
+        Todo: this.todo.Todo,
       }
-      if(this.Todo.trim() !==""){
+      if(this.todo.Todo.trim() !==""){
         Todo.todoSave(data)
         this.Listar()
+        alert('Salvo')
       }else{
         this.todo.push(this.Todo),
         Todo.todoUp(data)
         this.List();
-        alert('Salvo')
         this.Todo = ''
       }
+    console.log(data)
     },
     Editar(todo){
-      console.log(todo)
+      this.todo = todo
+      this.isEdit = true
+    
+
+    },
+    updateEdit(id){
+        const data = {
+          id: this.todo.id,
+          Titulo: this.todo.Titulo,
+          Todo: this.todo.Todo  
+        }
 
 
-    }
-    ,
+      if(this.todo.Todo.trim() !==""){
+        if(this.todo.id){
+          Todo.todoUp(id,data).then(()=>{
+            this.todo = {}
+            alert('Sucesso')
+            this.Listar()
+          })
+
+        }
+        
+      }
+    },
     Excluir(id){
       Todo.todoDel(id)
       this.Listar()
