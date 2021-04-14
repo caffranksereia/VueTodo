@@ -45,7 +45,11 @@ app.post('/Todo/post',(req,res) =>{
 })
 
 app.put('/Todo/update/:id',(req,res) =>{
-    const userTodo = db.get('Todo').find({id:req.params.id}).assign(req.body).write()
+    const id = req.params.id
+    const updatebody = req.body
+
+
+    const userTodo = db.get('Todo').find({id}).assign(updatebody).write()
 
    res.json(userTodo)
 })
