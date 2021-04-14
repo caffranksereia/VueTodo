@@ -1,11 +1,34 @@
 # VueTodo
-Todo List 
+    Todo List 
+# About project
+    projeto em vue e json usando o lowdb.
+
+# vue
+    npm install
+
+# Lowdb
+    npm install lowdb
+
+# express
+    npm install express 
+
+# cors
+    npm install cors
+
+# nodemon
+    npm install -g nodemon
+
+# rodar vue
+    npm run server
+
+# rodar lowdb pode ser com o nodemon* ou node
+    node index.js
 
 
-projeto em vue e json usando o lowdb.
 
-tem duas pastas no projeto um é o todo(é o projeto do Vue) e a outra vuetodoapi(json lowbd).
+# obs:
+    Tem duas pastas no projeto um é o todo(é o projeto do Vue) e a outra vuetodoapi(json lowbd).
+    Nodemon esta resetando então deixando a API off e on ao mesmo tempo.
 
-para rodar o localhost do vue é facil. Acesse a pasta VueTodoApi> e rode o comando no cmd node index.js ai aparecera o localhost:3000 e tambem como rodar pelo nodemon porem nao aconselho pois esta resetando API toda hora.
-
-Acessa a pasta todo e rode o comando no cmd npm run serve.
+# Dev: 
+    Fabio Eduardo
